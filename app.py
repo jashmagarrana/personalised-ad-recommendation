@@ -18,8 +18,10 @@ import plotly.express as px
 # ============================================================
 # Load artifacts
 # ============================================================
+
 @st.cache_resource
 def load_artifacts():
+
     # Base models
     content_model = joblib.load("model_content_based_lr.pkl")
     collab_model = joblib.load("model_collaborative_rf.pkl")
@@ -30,12 +32,10 @@ def load_artifacts():
     scaler = joblib.load("scaler.pkl")
     label_encoders = joblib.load("label_encoders.pkl")
 
-    # streamlit_config.pkl contains feature-engineering information
-    # required to construct a new input row.
-    # hybrid_config.pkl contains the final hybrid configuration.
+    # Hybrid configuration
     hybrid_config = joblib.load("hybrid_config.pkl")
 
-    # The final system is the Stacked Hybrid (Meta-Learner).
+    # Final stacked hybrid meta-learner
     meta_learner = joblib.load("model_hybrid_meta_learner.pkl")
 
     return (
@@ -50,6 +50,7 @@ def load_artifacts():
     )
 
 
+# Load all artefacts
 (
     content_model,
     collab_model,
@@ -57,10 +58,12 @@ def load_artifacts():
     gb_model,
     scaler,
     label_encoders,
-    config,
     hybrid_config,
     meta_learner,
 ) = load_artifacts()
+
+# Backward-compatible configuration variable
+config = hybrid_config
 
 FEATURE_COLUMNS = config["feature_columns"]
 MEDIAN_BROWSING_ENCODED = config["median_browsing_encoded"]
