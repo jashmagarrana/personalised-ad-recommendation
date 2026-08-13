@@ -32,8 +32,6 @@ def load_artifacts():
 
     # streamlit_config.pkl contains feature-engineering information
     # required to construct a new input row.
-    streamlit_config = joblib.load("streamlit_config.pkl")
-
     # hybrid_config.pkl contains the final hybrid configuration.
     hybrid_config = joblib.load("hybrid_config.pkl")
 
@@ -47,7 +45,6 @@ def load_artifacts():
         gb_model,
         scaler,
         label_encoders,
-        streamlit_config,
         hybrid_config,
         meta_learner,
     )
